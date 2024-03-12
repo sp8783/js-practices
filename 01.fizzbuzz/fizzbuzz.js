@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-for (let cnt = 1; cnt <= 20; cnt++) {
+for (let count = 1; count <= 20; count++) {
   let output = "";
-  if (cnt % 3 == 0) output += "Fizz";
-  if (cnt % 5 == 0) output += "Buzz";
-  console.log(output || String(cnt));
+  if (count % 3 == 0) output += "Fizz";
+  if (count % 5 == 0) output += "Buzz";
+  console.log(output || String(count));
 }
