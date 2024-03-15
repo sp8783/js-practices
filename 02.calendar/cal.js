@@ -13,15 +13,15 @@ function displayCalendar(year, month) {
   console.log("日 月 火 水 木 金 土");
 
   const firstDate = new Date(year, month - 1, 1);
-  const monthDays = new Date(year, month, 0).getDate();
+  const monthDayCount = new Date(year, month, 0).getDate();
 
   let print_line = " ".repeat(3 * firstDate.getDay());
-  for (let i = 1; i <= monthDays; i++) {
+  for (let i = 1; i <= monthDayCount; i++) {
     if (i < 10) {
       print_line += " ";
     }
     print_line += i.toString() + " ";
-    if ((i + firstDate.getDay()) % 7 == 0 || i == monthDays) {
+    if ((i + firstDate.getDay()) % 7 == 0 || i == monthDayCount) {
       console.log(print_line);
       print_line = "";
     }
