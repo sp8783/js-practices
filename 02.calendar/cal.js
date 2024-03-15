@@ -20,10 +20,12 @@ function displayCalendar(year, month) {
     if (i < 10) {
       print_line += " ";
     }
-    print_line += i.toString() + " ";
+    print_line += i.toString();
     if ((i + firstDate.getDay()) % 7 === 0 || i === monthDayCount) {
       console.log(print_line);
       print_line = "";
+    } else {
+      print_line += " ";
     }
   }
 }
