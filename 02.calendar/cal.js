@@ -9,7 +9,7 @@ function getYearAndMonth() {
 }
 
 function displayCalendar(year, month) {
-  console.log(centerAlign(month + "月 " + year));
+  console.log(alignCenter(month + "月 " + year));
   console.log("日 月 火 水 木 金 土");
 
   const firstDate = new Date(year, month - 1, 1);
@@ -28,7 +28,7 @@ function displayCalendar(year, month) {
   }
 }
 
-function centerAlign(text) {
+function alignCenter(text) {
   const WIDTH = 20;
   const padding = " ".repeat((WIDTH - text.length) / 2);
   return padding + text + padding;
