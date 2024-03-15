@@ -9,7 +9,7 @@ function getYearAndMonth() {
 }
 
 function displayCalendar(year, month) {
-  console.log(alignCenter(month + "月 " + year));
+  console.log(alignCenter(`${month}月 ${year}`));
   console.log("日 月 火 水 木 金 土");
 
   const firstDate = new Date(year, month - 1, 1);
