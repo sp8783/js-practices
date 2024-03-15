@@ -29,8 +29,8 @@ function displayCalendar(year, month) {
 }
 
 function alignCenter(text) {
-  const WIDTH = 20;
-  const padding = " ".repeat((WIDTH - text.length) / 2);
+  const width = 20;
+  const padding = " ".repeat((width - text.length) / 2);
   return padding + text + padding;
 }
 
