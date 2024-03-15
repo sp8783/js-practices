@@ -14,19 +14,9 @@ function displayCalendar(year, month) {
 
   const firstDate = new Date(year, month - 1, 1);
   const monthDayCount = new Date(year, month, 0).getDate();
-
-  let print_line = " ".repeat(3 * firstDate.getDay());
-  for (let i = 1; i <= monthDayCount; i++) {
-    if (i < 10) {
-      print_line += " ";
-    }
-    print_line += i.toString();
-    if ((i + firstDate.getDay()) % 7 === 0 || i === monthDayCount) {
-      console.log(print_line);
-      print_line = "";
-    } else {
-      print_line += " ";
-    }
+  const printLines = formatCalendarDate(firstDate, monthDayCount);
+  for (const printLine of printLines) {
+    console.log(printLine);
   }
 }
 
@@ -34,6 +24,21 @@ function alignCenter(text) {
   const width = 20;
   const padding = " ".repeat((width - text.length) / 2);
   return padding + text + padding;
+}
+
+function formatCalendarDate(firstDate, monthDayCount) {
+  let printLines = [];
+  let printLine = " ".repeat(3 * firstDate.getDay());
+  for (let day = 1; day <= monthDayCount; day++) {
+    printLine += day.toString().padStart(2, " ");
+    if ((day + firstDate.getDay()) % 7 === 0 || day === monthDayCount) {
+      printLines.push(printLine);
+      printLine = "";
+    } else {
+      printLine += " ";
+    }
+  }
+  return printLines;
 }
 
 const [year, month] = getYearAndMonth();
