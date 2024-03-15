@@ -2,8 +2,9 @@ import minimist from "minimist";
 
 function getYearAndMonth() {
   const argv = minimist(process.argv.slice(2));
-  const year = argv.y || new Date().getFullYear();
-  const month = argv.m || new Date().getMonth() + 1;
+  const currentDate = new Date();
+  const year = argv.y ?? currentDate.getFullYear();
+  const month = argv.m ?? currentDate.getMonth() + 1;
   return [year, month];
 }
 
