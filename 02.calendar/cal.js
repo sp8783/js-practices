@@ -21,7 +21,7 @@ function displayCalendar(year, month) {
       print_line += " ";
     }
     print_line += i.toString() + " ";
-    if ((i + firstDate.getDay()) % 7 == 0 || i == monthDayCount) {
+    if ((i + firstDate.getDay()) % 7 === 0 || i === monthDayCount) {
       console.log(print_line);
       print_line = "";
     }
