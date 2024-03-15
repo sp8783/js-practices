@@ -8,7 +8,7 @@ function getYearAndMonth() {
   return [year, month];
 }
 
-function display_calendar(year, month) {
+function displayCalendar(year, month) {
   console.log(centerAlign(month + "月 " + year));
   console.log("日 月 火 水 木 金 土");
 
@@ -35,4 +35,4 @@ function centerAlign(text) {
 }
 
 const [year, month] = getYearAndMonth();
-display_calendar(year, month);
+displayCalendar(year, month);
