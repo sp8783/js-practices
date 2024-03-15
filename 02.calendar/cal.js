@@ -1,7 +1,7 @@
 import minimist from "minimist";
 
 function getYearAndMonth() {
-  var argv = minimist(process.argv.slice(2));
+  const argv = minimist(process.argv.slice(2));
   const year = argv.y || new Date().getFullYear();
   const month = argv.m || new Date().getMonth() + 1;
   return [year, month];
