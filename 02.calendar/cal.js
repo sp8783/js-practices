@@ -30,7 +30,7 @@ function alignCenter(text) {
 
 function formatCalendarDate(firstDate, monthDayCount) {
   const printLines = [];
-  let printLine = " ".repeat(3 * firstDate.getDay());
+  let printLine = "   ".repeat(firstDate.getDay());
   for (let day = 1; day <= monthDayCount; day++) {
     printLine += day.toString().padStart(2, " ");
     if ((day + firstDate.getDay()) % 7 === 0 || day === monthDayCount) {
