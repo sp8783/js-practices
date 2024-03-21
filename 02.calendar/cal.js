@@ -25,7 +25,7 @@ function displayCalendar(year, month) {
 function alignCenter(text) {
   const width = 20;
   const padding = " ".repeat((width - text.length) / 2);
-  return padding + text + padding;
+  return `${padding}${text}${padding}`;
 }
 
 function formatCalendarDate(firstDate, monthDayCount) {
