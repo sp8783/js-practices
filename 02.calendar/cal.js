@@ -14,11 +14,15 @@ function displayCalendar(year, month) {
   console.log(alignCenter(`${month}月 ${year}`));
   console.log("日 月 火 水 木 金 土");
 
-  const firstDate = new Date(year, month - 1, 1);
+  const firstDateWeekday = new Date(year, month - 1, 1).getDay();
   const monthDayCount = new Date(year, month, 0).getDate();
-  const printLines = formatCalendarDate(firstDate, monthDayCount);
-  for (const printLine of printLines) {
-    console.log(printLine);
+
+  process.stdout.write("   ".repeat(firstDateWeekday));
+  for (let day = 1; day <= monthDayCount; day++) {
+    const dayString = day.toString().padStart(2, " ");
+    const separator =
+      (day + firstDateWeekday) % 7 === 0 || day === monthDayCount ? "\n" : " ";
+    process.stdout.write(`${dayString}${separator}`);
   }
 }
 
@@ -26,21 +30,6 @@ function alignCenter(text) {
   const width = 20;
   const padding = " ".repeat((width - text.length) / 2);
   return `${padding}${text}${padding}`;
-}
-
-function formatCalendarDate(firstDate, monthDayCount) {
-  const printLines = [];
-  let printLine = "   ".repeat(firstDate.getDay());
-  for (let day = 1; day <= monthDayCount; day++) {
-    printLine += day.toString().padStart(2, " ");
-    if ((day + firstDate.getDay()) % 7 === 0 || day === monthDayCount) {
-      printLines.push(printLine);
-      printLine = "";
-    } else {
-      printLine += " ";
-    }
-  }
-  return printLines;
 }
 
 const [year, month] = getYearAndMonth();
