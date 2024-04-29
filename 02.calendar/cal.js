@@ -14,14 +14,14 @@ function displayCalendar(year, month) {
   console.log(alignCenter(`${month}月 ${year}`));
   console.log("日 月 火 水 木 金 土");
 
-  const firstDateWeekday = new Date(year, month - 1, 1).getDay();
+  const firstDayOfWeek = new Date(year, month - 1, 1).getDay();
   const monthDayCount = new Date(year, month, 0).getDate();
 
-  process.stdout.write("   ".repeat(firstDateWeekday));
+  process.stdout.write("   ".repeat(firstDayOfWeek));
   for (let day = 1; day <= monthDayCount; day++) {
     const dayString = day.toString().padStart(2, " ");
     const separator =
-      (day + firstDateWeekday) % 7 === 0 || day === monthDayCount ? "\n" : " ";
+      (day + firstDayOfWeek) % 7 === 0 || day === monthDayCount ? "\n" : " ";
     process.stdout.write(`${dayString}${separator}`);
   }
 }
