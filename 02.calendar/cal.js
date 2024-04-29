@@ -19,10 +19,10 @@ function displayCalendar(year, month) {
 
   process.stdout.write("   ".repeat(firstDayOfWeek));
   for (let day = 1; day <= lastDayOfMonth; day++) {
-    const dayString = day.toString().padStart(2, " ");
+    const dayForDisplay = day.toString().padStart(2, " ");
     const separator =
       (day + firstDayOfWeek) % 7 === 0 || day === lastDayOfMonth ? "\n" : " ";
-    process.stdout.write(`${dayString}${separator}`);
+    process.stdout.write(`${dayForDisplay}${separator}`);
   }
 }
 
