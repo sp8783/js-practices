@@ -4,9 +4,9 @@ import minimist from "minimist";
 
 function getYearAndMonth() {
   const argv = minimist(process.argv.slice(2));
-  const currentDate = new Date();
-  const year = argv.y ?? currentDate.getFullYear();
-  const month = argv.m ?? currentDate.getMonth() + 1;
+  const now = new Date();
+  const year = argv.y ?? now.getFullYear();
+  const month = argv.m ?? now.getMonth() + 1;
   return [year, month];
 }
 
@@ -14,15 +14,19 @@ function displayCalendar(year, month) {
   console.log(alignCenter(`${month}月 ${year}`));
   console.log("日 月 火 水 木 金 土");
 
-  const firstDayOfWeek = new Date(year, month - 1, 1).getDay();
-  const lastDateOfMonth = new Date(year, month, 0).getDate();
+  const firstDate = new Date(year, month - 1, 1);
+  const lastDate = new Date(year, month, 0);
 
-  process.stdout.write("   ".repeat(firstDayOfWeek));
-  for (let day = 1; day <= lastDateOfMonth; day++) {
-    const dayForDisplay = day.toString().padStart(2, " ");
+  process.stdout.write("   ".repeat(firstDate.getDay()));
+  for (
+    let date = firstDate;
+    date <= lastDate;
+    date.setDate(date.getDate() + 1)
+  ) {
+    const dateForDisplay = date.getDate().toString().padStart(2, " ");
     const separator =
-      (day + firstDayOfWeek) % 7 === 0 || day === lastDateOfMonth ? "\n" : " ";
-    process.stdout.write(`${dayForDisplay}${separator}`);
+      date.getDay() === 6 || date.getDate() === lastDate.getDate() ? "\n" : " ";
+    process.stdout.write(`${dateForDisplay}${separator}`);
   }
 }
 
