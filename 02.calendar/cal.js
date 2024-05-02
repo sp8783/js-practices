@@ -15,13 +15,13 @@ function displayCalendar(year, month) {
   console.log("日 月 火 水 木 金 土");
 
   const firstDayOfWeek = new Date(year, month - 1, 1).getDay();
-  const lastDayOfMonth = new Date(year, month, 0).getDate();
+  const lastDateOfMonth = new Date(year, month, 0).getDate();
 
   process.stdout.write("   ".repeat(firstDayOfWeek));
-  for (let day = 1; day <= lastDayOfMonth; day++) {
+  for (let day = 1; day <= lastDateOfMonth; day++) {
     const dayForDisplay = day.toString().padStart(2, " ");
     const separator =
-      (day + firstDayOfWeek) % 7 === 0 || day === lastDayOfMonth ? "\n" : " ";
+      (day + firstDayOfWeek) % 7 === 0 || day === lastDateOfMonth ? "\n" : " ";
     process.stdout.write(`${dayForDisplay}${separator}`);
   }
 }
