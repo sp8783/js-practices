@@ -25,7 +25,7 @@ function displayCalendar(year, month) {
   ) {
     const dateForDisplay = date.getDate().toString().padStart(2, " ");
     const separator =
-      date.getDay() === 6 || date.getDate() === lastDate.getDate() ? "\n" : " ";
+      date.getDay() === 6 || date.valueOf() === lastDate.valueOf() ? "\n" : " ";
     process.stdout.write(`${dateForDisplay}${separator}`);
   }
 }
