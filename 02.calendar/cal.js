@@ -19,7 +19,7 @@ function displayCalendar(year, month) {
 
   process.stdout.write("   ".repeat(firstDate.getDay()));
   for (
-    let date = firstDate;
+    let date = new Date(firstDate);
     date <= lastDate;
     date.setDate(date.getDate() + 1)
   ) {
