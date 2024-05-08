@@ -73,9 +73,9 @@ async function main() {
   await timers.setTimeout(100);
   console.log("▼異常系ログ");
   await createBooksTable();
+  await insertBook("Railsの教科書").catch((err) => console.log(err));
   await insertBook("Railsの教科書").catch((err) => console.log(err)); // 一意制約エラーを発生させるため、同じタイトルのレコードを挿入する
-  await insertBook("Railsの教科書").catch((err) => console.log(err)); // レコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
-  await printAllRecords("foods").catch((err) => console.log(err));
+  await printAllRecords("foods").catch((err) => console.log(err)); // レコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
   await dropBooksTable();
 }
 
