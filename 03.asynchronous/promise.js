@@ -66,16 +66,13 @@ function dropBooksTable() {
 console.log("▼正常系ログ");
 createBooksTable()
   .then(() => insertBook("Railsの教科書"))
-  .catch((err) => console.log(err))
   .then(() => printAllRecords("books"))
-  .catch((err) => console.log(err))
   .then(() => dropBooksTable());
 
 await timers.setTimeout(100);
 console.log("▼異常系ログ");
 createBooksTable()
   .then(() => insertBook("Railsの教科書"))
-  .catch((err) => console.log(err))
   .then(() => insertBook("Railsの教科書")) // 一意制約エラーを発生させるため、同じタイトルのレコードを挿入する
   .catch((err) => console.log(err))
   .then(() => printAllRecords("foods")) // レコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
