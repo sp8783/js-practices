@@ -74,8 +74,16 @@ async function main() {
   console.log("▼異常系ログ");
   await createBooksTable();
   await insertBook("Railsの教科書");
-  await insertBook("Railsの教科書").catch((err) => console.log(err)); // 一意制約エラーを発生させるため、同じタイトルのレコードを挿入する
-  await printAllRecords("foods").catch((err) => console.log(err)); // レコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
+  try {
+    await insertBook("Railsの教科書"); // 一意制約エラーを発生させるため、同じタイトルのレコードを挿入する
+  } catch (err) {
+    console.log(err);
+  }
+  try {
+    await printAllRecords("foods"); // レコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
+  } catch (err) {
+    console.log(err);
+  }
   await dropBooksTable();
 }
 
