@@ -40,14 +40,14 @@ db.run(
           "Railsの教科書",
           function (err) {
             if (err) {
-              console.log(err);
+              console.error(err.message);
             } else {
               console.log(`ID:${this.lastID}のデータが追加されました`);
             }
             // ここでレコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
             db.all(`SELECT * FROM foods;`, (err, rows) => {
               if (err) {
-                console.log(err);
+                console.error(err.message);
               } else {
                 rows.forEach((row) => {
                   console.log(`ID:${row.id}, Title:${row.title}`);

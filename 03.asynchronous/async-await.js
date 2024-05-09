@@ -36,12 +36,12 @@ async function main() {
   try {
     await run(db, "INSERT INTO books (title) VALUES (?);", "Railsの教科書"); // 一意制約エラーを発生させるため、同じタイトルのレコードを挿入する
   } catch (err) {
-    console.log(err);
+    console.error(err.message);
   }
   try {
     await run(db, "SELECT * FROM foods;"); // レコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
   } catch (err) {
-    console.log(err);
+    console.error(err.message);
   }
   await run(db, "DROP TABLE books;");
 }
