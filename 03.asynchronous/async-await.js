@@ -1,90 +1,47 @@
 import sqlite3 from "sqlite3";
 import timers from "timers/promises";
+import { run, all } from "./sqlite3-promise-wrapper.js";
 
 const db = new sqlite3.Database(":memory:");
 
-function createBooksTable() {
-  return new Promise((resolve, reject) => {
-    db.run(
-      `
-      CREATE TABLE books (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          title TEXT NOT NULL UNIQUE
-      );
-      `,
-      (err) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      },
-    );
-  });
-}
-
-function insertBook(title) {
-  return new Promise((resolve, reject) => {
-    db.run(`INSERT INTO books (title) VALUES ('${title}');`, function (err) {
-      if (err) {
-        reject(err);
-      } else {
-        console.log(`ID:${this.lastID}のデータが追加されました`);
-        resolve();
-      }
-    });
-  });
-}
-
-function printAllRecords(table) {
-  return new Promise((resolve, reject) => {
-    db.all(`SELECT * FROM ${table};`, function (err, rows) {
-      if (err) {
-        reject(err);
-      } else {
-        rows.forEach((row) => {
-          console.log(`ID:${row.id}, Title: ${row.title}`);
-        });
-        resolve();
-      }
-    });
-  });
-}
-
-function dropBooksTable() {
-  return new Promise((resolve, reject) => {
-    db.run(`DROP TABLE books;`, function (err) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
-  });
-}
-
 async function main() {
   console.log("▼正常系ログ");
-  await createBooksTable();
-  await insertBook("Railsの教科書");
-  await printAllRecords("books");
-  await dropBooksTable();
+  await run(
+    db,
+    "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);",
+  );
+  const result = await run(
+    db,
+    "INSERT INTO books (title) VALUES ('Railsの教科書');",
+  );
+  console.log(`ID:${result.lastID}のデータが追加されました`);
+  const rows = await all(db, "SELECT * FROM books;");
+  rows.forEach((row) => console.log(`ID:${row.id}, Title: ${row.title}`));
+  await run(db, "DROP TABLE books;");
 
   await timers.setTimeout(100);
+
   console.log("▼異常系ログ");
-  await createBooksTable();
-  await insertBook("Railsの教科書");
+  await run(
+    db,
+    "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);",
+  );
+  const result2 = await run(
+    db,
+    "INSERT INTO books (title) VALUES ('Railsの教科書');",
+  );
+  console.log(`ID:${result2.lastID}のデータが追加されました`);
   try {
-    await insertBook("Railsの教科書"); // 一意制約エラーを発生させるため、同じタイトルのレコードを挿入する
+    await run(db, "INSERT INTO books (title) VALUES ('Railsの教科書');"); // 一意制約エラーを発生させるため、同じタイトルのレコードを挿入する
   } catch (err) {
     console.log(err);
   }
   try {
-    await printAllRecords("foods"); // レコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
+    await run(db, "SELECT * FROM foods;"); // レコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
   } catch (err) {
     console.log(err);
   }
-  await dropBooksTable();
+  await run(db, "DROP TABLE books;");
 }
 
 main();
