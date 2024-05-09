@@ -31,7 +31,15 @@ run(
     console.log(`ID:${result.lastID}のデータが追加されました`);
     return run(db, "INSERT INTO books (title) VALUES (?);", "Railsの教科書"); // 一意制約エラーを発生させるため、同じタイトルのレコードを挿入する
   })
-  .catch((err) => console.error(err.message))
+  .catch((err) => {
+    if (err.code === "SQLITE_CONSTRAINT") {
+      console.error(err.message);
+    }
+  })
   .then(() => run(db, "SELECT * FROM foods;")) // レコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
-  .catch((err) => console.error(err.message))
+  .catch((err) => {
+    if (err.code === "SQLITE_ERROR") {
+      console.error(err.message);
+    }
+  })
   .then(() => run(db, "DROP TABLE books;"));

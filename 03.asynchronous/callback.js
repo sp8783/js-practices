@@ -39,14 +39,14 @@ db.run(
           `INSERT INTO books (title) VALUES (?);`,
           "Railsの教科書",
           function (err) {
-            if (err) {
+            if (err.code === "SQLITE_CONSTRAINT") {
               console.error(err.message);
             } else {
               console.log(`ID:${this.lastID}のデータが追加されました`);
             }
             // ここでレコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
             db.all(`SELECT * FROM foods;`, (err, rows) => {
-              if (err) {
+              if (err.code === "SQLITE_ERROR") {
                 console.error(err.message);
               } else {
                 rows.forEach((row) => {
