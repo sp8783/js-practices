@@ -12,7 +12,7 @@ db.run(
       "Railsの教科書",
       function () {
         console.log(`ID:${this.lastID}のデータが追加されました`);
-        db.all(`SELECT * FROM books;`, function (_, rows) {
+        db.all(`SELECT * FROM books;`, (_, rows) => {
           rows.forEach((row) => {
             console.log(`ID:${row.id}, Title: ${row.title}`);
           });
@@ -45,7 +45,7 @@ db.run(
               console.log(`ID:${this.lastID}のデータが追加されました`);
             }
             // ここでレコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
-            db.all(`SELECT * FROM foods;`, function (err, rows) {
+            db.all(`SELECT * FROM foods;`, (err, rows) => {
               if (err) {
                 console.log(err);
               } else {
