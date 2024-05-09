@@ -15,7 +15,7 @@ run(
     return all(db, "SELECT * FROM books;");
   })
   .then((rows) =>
-    rows.forEach((row) => console.log(`ID:${row.id}, Title: ${row.title}`)),
+    rows.forEach((row) => console.log(`ID:${row.id}, Title:${row.title}`)),
   )
   .then(() => run(db, "DROP TABLE books;"));
 

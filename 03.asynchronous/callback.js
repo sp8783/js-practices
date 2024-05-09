@@ -50,7 +50,7 @@ db.run(
                 console.log(err);
               } else {
                 rows.forEach((row) => {
-                  console.log(`ID:${row.id}, Title: ${row.title}`);
+                  console.log(`ID:${row.id}, Title:${row.title}`);
                 });
               }
               db.run(`DROP TABLE books;`);

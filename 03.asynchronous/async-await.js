@@ -17,7 +17,7 @@ async function main() {
   );
   console.log(`ID:${result.lastID}のデータが追加されました`);
   const rows = await all(db, "SELECT * FROM books;");
-  rows.forEach((row) => console.log(`ID:${row.id}, Title: ${row.title}`));
+  rows.forEach((row) => console.log(`ID:${row.id}, Title:${row.title}`));
   await run(db, "DROP TABLE books;");
 
   await timers.setTimeout(100);
