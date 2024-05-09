@@ -9,7 +9,7 @@ run(
   db,
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);",
 )
-  .then(() => run(db, "INSERT INTO books (title) VALUES ('Railsの教科書');"))
+  .then(() => run(db, "INSERT INTO books (title) VALUES (?);", "Railsの教科書"))
   .then((result) => {
     console.log(`ID:${result.lastID}のデータが追加されました`);
     return all(db, "SELECT * FROM books;");
@@ -26,10 +26,10 @@ run(
   db,
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE);",
 )
-  .then(() => run(db, "INSERT INTO books (title) VALUES ('Railsの教科書');"))
+  .then(() => run(db, "INSERT INTO books (title) VALUES (?);", "Railsの教科書"))
   .then((result) => {
     console.log(`ID:${result.lastID}のデータが追加されました`);
-    return run(db, "INSERT INTO books (title) VALUES ('Railsの教科書');"); // 一意制約エラーを発生させるため、同じタイトルのレコードを挿入する
+    return run(db, "INSERT INTO books (title) VALUES (?);", "Railsの教科書"); // 一意制約エラーを発生させるため、同じタイトルのレコードを挿入する
   })
   .catch((err) => console.log(err))
   .then(() => run(db, "SELECT * FROM foods;")) // レコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
