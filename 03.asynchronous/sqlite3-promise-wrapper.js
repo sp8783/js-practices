@@ -1,6 +1,6 @@
 const run = (db, sql, params) => {
   return new Promise((resolve, reject) => {
-    db.run(sql, params, function (err) {
+    db.run(sql, params, (err) => {
       if (err) {
         reject(err);
       } else {
@@ -12,7 +12,7 @@ const run = (db, sql, params) => {
 
 const all = (db, sql, params) => {
   return new Promise((resolve, reject) => {
-    db.all(sql, params, function (err, rows) {
+    db.all(sql, params, (err, rows) => {
       if (err) {
         reject(err);
       } else {
