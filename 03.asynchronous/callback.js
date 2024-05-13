@@ -14,7 +14,7 @@ db.run(
         console.log(`ID:${this.lastID}のデータが追加されました`);
         db.all(`SELECT * FROM books;`, (_, rows) => {
           rows.forEach((row) => {
-            console.log(`ID:${row.id}, Title: ${row.title}`);
+            console.log(`ID:${row.id}, Title:${row.title}`);
           });
           db.run(`DROP TABLE books;`);
         });
