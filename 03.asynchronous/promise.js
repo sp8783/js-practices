@@ -39,6 +39,8 @@ run(
   .catch((err) => {
     if (err instanceof Error && err.code === "SQLITE_CONSTRAINT") {
       console.error(err.message);
+    } else {
+      throw err;
     }
   })
   .then(() => run(db, "SELECT * FROM foods;")) // ここでレコード取得のエラーを発生させるため、存在しないテーブル名（foods）を指定する
@@ -50,6 +52,8 @@ run(
   .catch((err) => {
     if (err instanceof Error && err.code === "SQLITE_ERROR") {
       console.error(err.message);
+    } else {
+      throw err;
     }
   })
   .then(() => run(db, "DROP TABLE books;"));

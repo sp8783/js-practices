@@ -44,6 +44,8 @@ try {
 } catch (err) {
   if (err instanceof Error && err.code === "SQLITE_CONSTRAINT") {
     console.error(err.message);
+  } else {
+    throw err;
   }
 }
 try {
@@ -54,6 +56,8 @@ try {
 } catch (err) {
   if (err instanceof Error && err.code === "SQLITE_ERROR") {
     console.error(err.message);
+  } else {
+    throw err;
   }
 }
 await run(db, "DROP TABLE books;");
