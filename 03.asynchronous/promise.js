@@ -37,7 +37,7 @@ run(
     console.log(`ID:${result.lastID}のデータが追加されました`);
   })
   .catch((err) => {
-    if (err.code === "SQLITE_CONSTRAINT") {
+    if (err instanceof Error && err.code === "SQLITE_CONSTRAINT") {
       console.error(err.message);
     }
   })
@@ -48,7 +48,7 @@ run(
     }),
   )
   .catch((err) => {
-    if (err.code === "SQLITE_ERROR") {
+    if (err instanceof Error && err.code === "SQLITE_ERROR") {
       console.error(err.message);
     }
   })

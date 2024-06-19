@@ -42,7 +42,7 @@ try {
   ); // ここで一意制約エラーを発生させるため、同じタイトルのレコードを挿入する
   console.log(`ID:${result3.lastID}のデータが追加されました`);
 } catch (err) {
-  if (err.code === "SQLITE_CONSTRAINT") {
+  if (err instanceof Error && err.code === "SQLITE_CONSTRAINT") {
     console.error(err.message);
   }
 }
@@ -52,7 +52,7 @@ try {
     console.log(`ID:${row.id}, Title:${row.title}`);
   });
 } catch (err) {
-  if (err.code === "SQLITE_ERROR") {
+  if (err instanceof Error && err.code === "SQLITE_ERROR") {
     console.error(err.message);
   }
 }
