@@ -21,7 +21,6 @@ rows.forEach((row) => {
 });
 await run(db, "DROP TABLE books;");
 
-await timers.setTimeout(100);
 console.log("▼異常系ログ");
 
 await run(
