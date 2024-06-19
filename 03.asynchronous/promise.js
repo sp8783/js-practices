@@ -14,12 +14,12 @@ run(
     console.log(`ID:${result.lastID}のデータが追加されました`);
     return all(db, "SELECT * FROM books;");
   })
-  .then((rows) =>
+  .then((rows) => {
     rows.forEach((row) => {
       console.log(`ID:${row.id}, Title:${row.title}`);
-    }),
-  )
-  .then(() => run(db, "DROP TABLE books;"));
+    });
+    return run(db, "DROP TABLE books;");
+  });
 
 await timers.setTimeout(100);
 console.log("▼異常系ログ");
