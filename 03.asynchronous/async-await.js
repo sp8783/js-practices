@@ -1,4 +1,3 @@
-import timers from "timers/promises";
 import sqlite3 from "sqlite3";
 import { run, all } from "./sqlite3-promise-wrapper.js";
 
